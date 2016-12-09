@@ -17,7 +17,8 @@ trait AggregateRef[A <: AggregateLike, F[_]] extends AggregateAliases {
   def tell(cmd: Command): Unit
 
   def state(): F[Aggregate]
-  def exists(): F[Boolean]
+  def isDefined(): F[Boolean]
+  def exists(predicate: A => Boolean): F[Boolean]
 
   def withAskTimeout(timeout: FiniteDuration): AggregateRef[A, Future]
 }
